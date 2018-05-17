@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="description" content="Soerya Website Description Here">
+		<meta name="keywords" content="solar,power,calculator">
+		<title>Soorya | Solar Power Calculator</title>
+
+		<!--Import materialize.min.css-->
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link type="text/css" rel="stylesheet" href="assets/materialize/css/materialize.min.css" media="screen,projection"/>
+		<link type="text/css" rel="stylesheet" href="assets/main.css" media="screen,projection"/>
+
+		<!-- Favicon -->
+		<link rel="icon" type="image/x-icon" href="favicon.ico">
+
+		<!--Optimized for Mobile-->
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    	<!--Load Header Footer -->
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    	<script> 
+	</script> 
+	</head>
+
+	<body class="tribox-theme tb-homepage tb-page-with-slider">
+		<header id="cus-header">
+
+		</header>
+
+		<main>
+			<section id="section1-landing" class="section full-height-section" name="home">
+				<div class="slider fullscreen">
+					<ul class="slides">
+						<li>
+							<img src="assets/images/solar-on-roof.jpg" alt="Improved Business"> <!-- random image -->
+							<div class="slider-layer fullscreen"></div>
+							<div class="caption center-align">
+								<h3>RENEWABLE ENERGY FOR EVERYONE</h3>
+								<h5 class="light">Find out your Solar Potential</h5>
+				
+								<button id="slide-to-calc"><a href="#works">CALCULATE</a></button>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</section>
+
+			<section id="section2-about" class="section light-section" name="about">
+				<div class="full-container">
+					<div class="row">
+						<div class="col s3">
+							<i class="material-icons left">work</i>
+							<h3>What we do</h3>
+							<p>Solar Calculator is your resource for everything solar. We provide all of the information you need to decide whether or not to invest in solar power panels and batteries. We are passionate about solar and its positive environmental and financial benefits.</p>
+						</div>
+						<div class="col s3">
+							<i class="material-icons left">show_chart</i>
+							<h3>Run the calculator</h3>
+							<p>Our solar calculator will calculate:<br>
+								<ul>
+									<li>Your optimal system size</li>
+									<li>Your solar power production</li>
+									<li>The system cost</li>
+									<li>Financial savings</li>
+									<li>Payback period</li>
+									<li>Environmental benefits</li>
+								</ul>
+							</p>
+						</div>
+						<div class="col s3">
+							<i class="material-icons left">highlight</i>
+							<h3>Learn more...</h3>
+							<p>Our site is full of information for people wanting to go solar, and existing owners wanting storage solutions. We cover: solar rebates, feed in tariffs, panel size and cost, battery storage, off grid systems, solar finance and electricity usage; and we provide calculators on each of these topics.</p>
+						</div>
+						<div class="col s3">
+							<i class="material-icons left">format_list_numbered</i>
+							<h3>Get 3 free quotes</h3>
+							<p>If you think solar is right for you, we can put you in touch with 3 recommended, certified, solar installers. Simply fill out our quote form and we’ll take care of the rest.</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section id="section3-services" class="section dark-section" name="services">
+				<div class="container">
+					<h2 class="section-title center-align"><span>TO BECOME THE PRIMARY ENABLER</span><br>OF SOLAR ENERGY ADOPTION IN ASIA<br>
+						<span>IN 3 EASY STEPS :</span></h2>
+					<div class="row">
+						<div class="col s4">
+							<i class="material-icons center">mode_edit</i>
+							<h3>FILL IN<br>INFORMATION</h3>
+							<!-- <p>Use our solar power calculator to see if solar is right for you.</p> -->
+						</div>
+						<div class="col s4">
+							<i class="material-icons center">insert_chart</i>
+							<h3>REVIEW<br>RESULTS</h3>
+							<!-- <p>View your results and try some different variables.</p> -->
+						</div>
+						<div class="col s4">
+							<i class="material-icons center">attach_money</i>
+							<h3>APPLY FOR<br>SOLAR FINANCING</h3>
+							<!-- <p>Have us find 3 suitable solar installers to quote on your solar system.</p> -->
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section id="section4-works" class="section full-height-section light-section" name="works">
+				<div class="container">
+					<div id="calc-container" class="row">
+						<div class="col s3">
+							<br>
+						</div>
+						<div class="col s6">
+							<h2 id="calc-title"class="section-title center-align"><span>SOLAR POWER CALCULATOR</span></h2>
+							<p id="calc-desc">Fill in the details about your property and the type of solar power system you are seeking.</p>
+
+							<form id="calc-form" class="unmaterial-form" action="#" method="get" >
+								<!-- HOUSEHOLD DETAILS -->
+								<h3><span class="rounded-number">1</span>HOUSEHOLD DETAILS</h3>
+								<hr>
+								<div class="calc-input req">
+									<label>Zipcode</label>
+									<input type="number" name="zipcode" id="zipcode" placeholder="Your zipcode" required/>
+								</div>
+								<div class="calc-input">
+									<label>Building</label>
+									<select name="building" id="building" form="calc-form">
+										<option value="Residential">Residential</option>
+										<option value="Commercial">Commercial</option>
+										<option value="Industrial">Industrial</option>
+									</select>
+								</div>
+								<div class="calc-input req">
+									<label>Avg. Bill (Rp)</label>
+									<input type="text" name="bill" id="bill" class="value-input" required/>
+								</div>
+								<div class="calc-input">
+									<label>Power (KVA)</label>
+									<input type="text" name="power" id="power" class="value-input"/>
+								</div>
+								<div class="calc-input req">
+									<label>Name</label>
+									<input type="text" name="name" id="name" required/>
+								</div>
+								<div class="calc-input">
+									<label>Phone</label>
+									<input type="tel" name="phone" id="phone"/>
+								</div>
+								<div class="calc-input req">
+									<label>Email</label>
+									<input type="email" name="email" id="email" required/>
+								</div>
+								<div class="calc-input req">
+									<label>Address</label>
+									<input type="text" name="address" id="address" class="controls" required/>
+								</div>
+								<div class="calc-input">
+									<label>Notes on Location</label>
+									<textarea name="notes" id="notes" rows="1" placeholder="Block No. / Floor / Landmark"/></textarea>
+								</div>
+								<div class="calc-input">
+									<label>Pick Location</label>
+									<input type="hidden" name="latitude" id="latitude"/>
+									<input type="hidden" name="longitude" id="longitude"/>
+									<input type="hidden" name="city" id="city"/>
+									<input type="hidden" name="formatted" id="formatted"/>
+									<div id="googleMap" style="width:100%;height:300px;"></div>
+								</div>
+
+
+
+									<!-- <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+								    <div id="map"></div> -->
+
+								<!-- SOLAR SYSTEM DETAILS -->
+								<h3><span class="rounded-number">2</span>SOLAR SYSTEM DETAILS</h3>
+								<hr>
+								<!-- <div class="calc-input">
+									<label>Energy Savings (%)</label>
+									<input type="number" name="energys" id="energys" required/>
+								</div> -->
+								<!-- <div class="calc-input">
+									<div class="cus-range cover">
+										<label>Coverage (%)</label>
+										<div id="coverage-slider">
+											<div class="min-value-range">0&#37;</div>
+											<input type="range" name="coverage" id="coverage" min="0" max="100" step="10" value="0"/>
+											<div class="max-value-range">100&#37;</div>
+										</div>
+									</div>
+								</div> -->
+								<div class="calc-input">
+									<div class="cus-range rpit">
+										<label>Roof Pitch (Appx.)</label>
+										<div id="roof-pit-img">
+											<img id="roof-pit-sun" src="assets/images/roof1-sun.png" alt="Roof Pitch Sun"/>
+											<img id="roof-pit-rotation" src="assets/images/roof1.png" alt="Roof Pitch Solar"/>
+										</div>
+										<div id="roof-pit-inp">
+											<div class="min-value-range">0&deg;</div>
+											<input type="range" name="rpit" id="rpit" min="0" max="45" step="5" value="0"/>
+											<div class="max-value-range">45&deg;</div>
+										</div>
+									</div>
+								</div>
+								<div class="calc-input">
+									<div class="cus-range rori">
+										<label>Roof Orientation (Appx.)</label>
+										<div id="roof-ori-img">
+											<img id="roof-ori-rotation" src="assets/images/roof2.png" alt="Roof Pitch Solar"/>
+										</div>
+										<div id="roof-ori-inp">
+											<div class="min-value-range">N</div>
+											<input type="range" name="rori" id="rori" min="0" max="16" step="1" value="0"/>
+											<input type="hidden" name="rori_text" id="rori_text" value="N"/>
+											<div class="max-value-range">N</div>
+										</div>
+									</div>
+								</div>
+								<h3><span class="rounded-number">3</span>CUSTOMER APPROVAL</h3>
+								<hr>
+								<div class="calc-input">
+									<label>Are you interested to install solar energy?</label>							
+							      	<label class="cus-checkbox">
+							        	<span></span>
+										<input type="checkbox" class="checkbox" value="Yes" checked="checked"/>
+							     	 </label>
+								</div>
+								<button type="submit" name="submit" id="calc-form-button">CALCULATE</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section id="section5-contact" class="section dark-section" name="contact">
+					<div class="row">
+						<div class="col s6">
+							<h2 class="section-title left-align"><span>Why is solar</span><br>right for you</h2>
+						</div>
+						<div class="col s6">
+							<ul>
+								<li>With the current price level, the electricity you generate from solar can be <b>2-3 times cheaper</b> than electricity you get from the grid.</li>
+
+								<li>Recent government regulation allows for “Net metering”, which means you can lower your electricity bill just by going solar.</li>
+
+								<li>Solar panel price has dropped by more than 90% for the past 30 years. Adopting solar has become cheap and easy for everyone.</li>
+							</ul>
+						</div>
+					</div>
+			</section>
+
+			<section id="section6-freeflow" class="section light-section" name="freeflow">
+					<div class="row">
+						<div class="col s6">
+							<h3 class="section-title left-align">Energy variables</h3>
+							<p>Our calculator will help to calculate the most effective “system size” based on your need. Performance will vary depending on :</p>
+							<ul>
+								<li>Weather and climate</li>
+								<li>Roof angle and orientation</li>
+								<li>Shading</li>
+								<li>Quantity and quality of solar panels</li>
+							</ul>
+
+							<p>We try to reduce the variable by helping you make a better decision.</p>
+						</div>
+						<div class="col s6 lgbg">
+							<h3 class="section-title left-align">Financial variables</h3>
+							<p>Your savings will depend on the energy you produce, consume, and sell back to the grid.</p>
+							<p>Fees can vary depending on :</p>
+							<ul>
+								<li>Additional installation expense (for challenging installations)</li>
+								<li>PLN minimum tariff</li>
+								<li>Interest rate from investor</li>
+							</ul>
+
+							<p><br><br></p>
+						</div>
+					</div>
+			</section>
+
+			<section id="section7-newsletter" class="section light-section" name="newsletter">
+				<div class="container">
+					<div class="row">
+						<div class="col s4">
+							<h2 class="section-title left-align"><span>Zero stress</span><br>installation</h2>
+							<i class="material-icons left">developer_board</i>
+						</div>
+						<div class="col s1">
+							<br>
+						</div>
+						<div class="col s6">
+							<h3 class="section-title left-align">Design</h3>
+							<ul>
+								<li>We help you determine the most optimum system size and pick the best hardware choice.</li>
+								<li>We will provide guidance to help you the best decision.</li>
+							</ul>
+							<h3 class="section-title left-align"><span>On-site work</span></h3>
+							<ul>
+								<li>Single point of contact from beginning to end.</li>
+								<li>We only request a representative presence during installation.</li>
+								<li>System less than 5kw can be done within one day.</li>
+							</ul>
+							<h3 class="section-title left-align">Net metering</h3>
+							<ul>
+								<li>Net metering allows you to push electricity from your solar energy to the PLN power grid. You’ll see the savings on your next monthly electricity bill.</li>
+								<li>We will process the technical approval and bi-directional meter installation.</li>
+							</ul>
+						</div>
+						<div class="col s1">
+							<br>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<footer id="cus-footer">
+
+		</footer>
+
+		<!--Import $ before materialize.js-->
+		<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script> -->
+		<script src='assets/scripts/jquery/jquery-3.2.1.min.js' type="text/javascript"></script>
+		<script src='assets/scripts/bootstrap/bootstrap.min.js' type="text/javascript"></script>
+		<script type="text/javascript" src="assets/materialize/js/materialize.js"></script>
+		<script type="text/javascript" src="assets/main.js"></script>
+		<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBY7Ez8sWcPYxxlFLAinOCX8SDktDjBV8o&callback=initMap"></script>-->
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBY7Ez8sWcPYxxlFLAinOCX8SDktDjBV8o&libraries=places&callback=initMap"
+         async defer></script>
+		<script type="text/javascript" src="assets/full-height-section.js"></script>
+	</body>
+</html>
