@@ -912,6 +912,11 @@ $(document).ready(function(){
 			"subject": $(".calc-input #subject").val().trim(),
 			"message": $(".calc-input #message").val().trim(),
 		};
+
+		$(".calc-input #name").val("");
+		$(".calc-input #emailaddress").val("");
+		$(".calc-input #subject").val("");
+		$(".calc-input #message").val("");
 		
 		//JSONinput = $( this ).serializeArray();
 		console.log(JSONinput);
@@ -921,12 +926,12 @@ $(document).ready(function(){
 			url: "http://api.soorya.energy/Api/Contact",
 	        data: JSON.stringify(JSONinput),
 	        contentType: "application/json; charset=utf-8",
-	        dataType: "json",
+	        dataType: "text",
 			xhrFields: {
 				withCredentials: true
 			},
 	        success: function(data) {
-	        	console.log("form-submitted");
+	        	console.log("Form submitted! Return : " + data);
 	        	$(".success-message").show();
 
 	        },

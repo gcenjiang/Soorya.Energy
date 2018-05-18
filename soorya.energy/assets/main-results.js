@@ -236,29 +236,29 @@ $(document).ready(function(){
 		//JSONinput = $( this ).serializeArray();
 		console.log(JSONinput);
 
-		// $.ajax({
-		// 	type: "POST",
-		// 	url: "http://api.soorya.energy/api/Calculator",
-	 //        data: JSON.stringify(JSONinput),
-	 //        contentType: "application/json; charset=utf-8",
-	 //        dataType: "json",
-		// 	xhrFields: {
-		// 		withCredentials: true
-		// 	},
-	 //        success: function(data) {
-	 //        	console.log(data);
-	 //        	//Showing Results Below	
-		// 		// STORING TO LOCALSTORAGE -- BEGIN
-		// 		//
-		// 		localStorage.setItem('solar-results', JSON.stringify(data));
-		// 		$(location).attr('href','/solar-calculator-results.html');
-		// 		//
-		// 		// STORING TO LOCALSTORAGE -- END
-	 //        },
-	 //        failure: function(errMsg) {
-	 //            console.log(errMsg);
-	 //        }
-		// });
+		$.ajax({
+			type: "POST",
+			url: "http://api.soorya.energy/api/Calculator",
+	        data: JSON.stringify(JSONinput),
+	        contentType: "application/json; charset=utf-8",
+	        dataType: "json",
+			xhrFields: {
+				withCredentials: true
+			},
+	        success: function(data) {
+	        	console.log(data);
+	        	//Showing Results Below	
+				// STORING TO LOCALSTORAGE -- BEGIN
+				//
+				localStorage.setItem('solar-results', JSON.stringify(data));
+				$(location).attr('href','/solar-calculator-results.html');
+				//
+				// STORING TO LOCALSTORAGE -- END
+	        },
+	        failure: function(errMsg) {
+	            console.log(errMsg);
+	        }
+		});
 	});
 
 
