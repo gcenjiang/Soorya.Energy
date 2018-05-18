@@ -52,6 +52,7 @@ $(document).ready(function(){
 	});
 
 	//LOAD VALUES FROM STORAGE
+	//simulateData();
 	var yeCostWithSolar = [], yeCostWithoutSolar = [];
 	var resultArray = JSON.parse(localStorage.getItem('solar-results'));
 	console.log(resultArray);
@@ -67,11 +68,11 @@ $(document).ready(function(){
 
 		// Client request to remove #firstYearSavings
 		//HIGHLIGHTS 1
-		$('#firstYearSavings').html("Rp " + parseFloat(resultArray['firstYearSavings']).toLocaleString( "en-US" ));
-		$('#annualSavings').html("Rp " + parseFloat(resultArray['annualSavings']).toLocaleString( "en-US" ));
+		$('#firstYearSavings').html("Rp " + Math.floor(parseFloat(resultArray['firstYearSavings'])).toLocaleString( "en-US" ));
+		$('#annualSavings').html("Rp " + Math.floor(parseFloat(resultArray['annualSavings'])).toLocaleString( "en-US" ));
 		$('#paybackPeriod').html(parseFloat(resultArray['paybackPeriod']).toLocaleString( "en-US" ) + " years");
-		$('#solarSystemCost').html("Rp " + parseFloat(resultArray['solarSystemCost']).toLocaleString( "en-US" ));
-		$('#returnOnInvestment').html(parseFloat(resultArray['returnOnInvestment']).toLocaleString( "en-US" ) + " &#37;");
+		$('#solarSystemCost').html("Rp " + Math.floor(parseFloat(resultArray['solarSystemCost'])).toLocaleString( "en-US" ));
+		$('#returnOnInvestment').html(parseFloat(resultArray['returnOnInvestment']).toLocaleString( "en-US" , {minimumFractionDigits:2} ) + " &#37;");
 
 		//HIGHLIGHTS 2
 		$('#systemSize').html(parseFloat(resultArray['systemSize']).toLocaleString( "en-US" ));
@@ -97,91 +98,102 @@ $(document).ready(function(){
 		$('#monthlySolarProductionTable').html(parseFloat(resultArray['monthlySolarProduction']).toLocaleString( "en-US" ) + " kWh");
 
 		//SYSTEM COSTS
-		$('#solarSystemCostTable').html("Rp " + parseFloat(resultArray['solarSystemCost']).toLocaleString( "en-US" ));
-		$('#costOfSolarPerWatt').html("Rp " + parseFloat(resultArray['costOfSolarPerWatt']).toLocaleString( "en-US" ));
-		$('#lifetimeCostOfElectricity').html("Rp " + parseFloat(resultArray['lifetimeCostOfElectricity']).toLocaleString( "en-US" ));
+		$('#solarSystemCostTable').html("Rp " + Math.floor(parseFloat(resultArray['solarSystemCost'])).toLocaleString( "en-US" ));
+		$('#costOfSolarPerWatt').html("Rp " + Math.floor(parseFloat(resultArray['costOfSolarPerWatt'])).toLocaleString( "en-US" ));
+		$('#lifetimeCostOfElectricity').html("Rp " + Math.floor(parseFloat(resultArray['lifetimeCostOfElectricity'])).toLocaleString( "en-US" ));
 
 		//Savings & Financials (20 years Average)
-		$('#annualSavingsTable').html("Rp " + parseFloat(resultArray['annualSavings']).toLocaleString( "en-US" ));
-		$('#lifetimeSavings').html("Rp " + parseFloat(resultArray['lifetimeSavings']).toLocaleString( "en-US" ));
+		$('#annualSavingsTable').html("Rp " + Math.floor(parseFloat(resultArray['annualSavings'])).toLocaleString( "en-US" ));
+		$('#lifetimeSavings').html("Rp " + Math.floor(parseFloat(resultArray['lifetimeSavings'])).toLocaleString( "en-US" ));
 		$('#paybackPeriodTable').html(parseFloat(resultArray['paybackPeriod']).toLocaleString( "en-US" ) + " years");
 		$('#returnOnInvestmentTable').html(parseFloat(resultArray['returnOnInvestment']).toLocaleString( "en-US" ) + " &#37;");
 	} else {
+
 		//STILL GENERATE EMPTY CHART FOR ELECTRICITY BILL
 		for (var i = 0; i < 25; i++) {
 			yeCostWithSolar.push(100000+i*i*1000);
 			yeCostWithoutSolar.push(200000+i*i*1000);
 		}
-		// console.log(yeCostWithSolar);
-		// console.log(yeCostWithoutSolar);
 
 		generateChart(yeCostWithSolar,yeCostWithoutSolar);
 	}
 
 	// FILL CHART
 	function generateChart (dataset1, dataset2) {
-		Highcharts.chart('comp-chart', {
-
-		    title: {
-		        text: 'Cost of electricity with and without solar'
-		    },
-
-		    subtitle: {
-		        text: ''
-		    },
-
-		    xAxis: {
-		        title: {
-		            text: 'Year'
-		        }
-		    },
-
-		    yAxis: {
-		        title: {
-		            text: 'Cost'
-		        }
-		    },
-
-		    legend: {
-		        layout: 'vertical',
-		        align: 'right',
-		        verticalAlign: 'middle'
-		    },
-
-		    plotOptions: {
-		        series: {
-		            label: {
-		                connectorAllowed: false
-		            },
-		            pointStart: 1
-		        }
-		    },
-
-		    series: [{
-		        name: 'Yearly Electricity Cost With Solar',
-		        data: dataset1,
-		        color: '#4a8ac2'
-		    }, {
-		        name: 'Yearly Electricity Cost Without Solar',
-		        data: dataset2,
-		        color: '#8ac24a'
-		    }],
-
-		    responsive: {
-		        rules: [{
-		            condition: {
-		                maxWidth: 500
-		            },
-		            chartOptions: {
-		                legend: {
-		                    layout: 'horizontal',
-		                    align: 'center',
-		                    verticalAlign: 'bottom'
-		                }
-		            }
+		var ctx = document.getElementById("myChart").getContext('2d');
+		var myChart = new Chart(ctx, {
+		    type: 'line',
+		    data: {
+		        labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12",
+		        	"13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25"
+		        	],
+		        datasets: [{
+		            label: 'Yearly Electricity Cost With Solar',
+		            data: dataset1,
+		            backgroundColor: '#4a8ac2',
+		            borderColor: '#4a8ac2',
+		            borderWidth: 1,
+		            fill: false
+		        },{
+		            label: 'Yearly Electricity Cost Without Solar',
+		            data: dataset2,
+		            backgroundColor: '#8ac24a',
+		            borderColor: '#8ac24a',
+		            borderWidth: 1,
+		            fill: false
 		        }]
+		    },
+		    options: {
+		    	responsive: true,
+		    	maintainAspectRatio: false,
+		    	layout: {
+		            padding: {
+		                left: 0,
+		                right: 0,
+		                top: 0,
+		                bottom: 0
+		            }
+		        },
+		        legend: {
+		            display: true,
+		            labels: {
+		                usePointStyle: true,
+		                position: 'right'
+		            }
+		        },
+		        scales: {
+		            xAxes: [{
+		            	scaleLabel: {
+		            		display: true,
+		            		labelString: 'Years',
+		            	},
+		            	ticks: {
+		                    autoSkip : true,
+		                    autoSkipPadding: 50
+		                },
+		                gridLines: {
+		                	display: false,
+		                	zeroLineWidth : 0
+		                }
+		            }],
+		            yAxes: [{
+		            	scaleLabel: {
+		            		display: true,
+		            		labelString: 'Cost (IDR)',
+		            	},
+		            	ticks: {
+		                    beginAtZero: true,
+		                    autoSkip : true,
+		                    autoSkipPadding: 50,
+		                    padding: 10
+		                },
+		                gridLines: {
+		                	display: true,
+		                	drawTicks : false
+		                }
+		            }]
+		        }
 		    }
-
 		});
 	}
 
@@ -224,29 +236,352 @@ $(document).ready(function(){
 		//JSONinput = $( this ).serializeArray();
 		console.log(JSONinput);
 
-		$.ajax({
-			type: "POST",
-			url: "http://api.soorya.energy/api/Calculator/Recalculate",
-	        data: JSON.stringify(JSONinput),
-	        contentType: "application/json; charset=utf-8",
-	        dataType: "json",
-			xhrFields: {
-				withCredentials: true
-			},
-	        success: function(data) {
-	        	console.log(data);
-	        	//Showing Results Below	
-				// STORING TO LOCALSTORAGE -- BEGIN
-				//
-				localStorage.setItem('solar-results', JSON.stringify(data));
-				$(location).attr('href','/solar-calculator-results.html');
-				//
-				// STORING TO LOCALSTORAGE -- END
-	        },
-	        failure: function(errMsg) {
-	            console.log(errMsg);
-	        }
-		});
+		// $.ajax({
+		// 	type: "POST",
+		// 	url: "http://api.soorya.energy/api/Calculator",
+	 //        data: JSON.stringify(JSONinput),
+	 //        contentType: "application/json; charset=utf-8",
+	 //        dataType: "json",
+		// 	xhrFields: {
+		// 		withCredentials: true
+		// 	},
+	 //        success: function(data) {
+	 //        	console.log(data);
+	 //        	//Showing Results Below	
+		// 		// STORING TO LOCALSTORAGE -- BEGIN
+		// 		//
+		// 		localStorage.setItem('solar-results', JSON.stringify(data));
+		// 		$(location).attr('href','/solar-calculator-results.html');
+		// 		//
+		// 		// STORING TO LOCALSTORAGE -- END
+	 //        },
+	 //        failure: function(errMsg) {
+	 //            console.log(errMsg);
+	 //        }
+		// });
 	});
+
+
+
+	function simulateData() {
+		//JUST SIMULATING RECEIVED DATA FROM SERVER SIDE
+		var simulatedData = {
+			"address"					: "Indonesia",
+			"annualSavings"				: "33464329",
+			"areaRequired"				: "33",
+			"buildingType"				: "Residential",
+			"city"						: "Jakarta",
+			"costOfSolarPerWatt"		: "18000",
+			"electricityBillComparison"	: ([
+			{
+				"accumulatedSavings"				: "16739578.77",
+				"costOfGridElectricity"				: "1467.28",
+				"electricityCanBeCoveredBySolar"	: "17277.96",
+				"energyConsumedYearly"				: "20445.96",
+				"savingsValue"						: "16739578.77",
+				"year"								: "1",
+				"yearlyElectricityCostWithSolar"	: "13260369.42",
+				"yearlyElectricityCostWithoutSolar"	: "29999948.19",
+				"yearlyMinimumFromPLN"				: "4648343.04",
+
+			},{
+				"accumulatedSavings"				: "16739578.77",
+				"costOfGridElectricity"				: "1467.28",
+				"electricityCanBeCoveredBySolar"	: "17277.96",
+				"energyConsumedYearly"				: "20445.96",
+				"savingsValue"						: "16739578.77",
+				"year"								: "2",
+				"yearlyElectricityCostWithSolar"	: "13260369.42",
+				"yearlyElectricityCostWithoutSolar"	: "29999948.19",
+				"yearlyMinimumFromPLN"				: "4648343.04",
+
+			},{
+				"accumulatedSavings"				: "16739578.77",
+				"costOfGridElectricity"				: "1467.28",
+				"electricityCanBeCoveredBySolar"	: "17277.96",
+				"energyConsumedYearly"				: "20445.96",
+				"savingsValue"						: "16739578.77",
+				"year"								: "3",
+				"yearlyElectricityCostWithSolar"	: "13260369.42",
+				"yearlyElectricityCostWithoutSolar"	: "29999948.19",
+				"yearlyMinimumFromPLN"				: "4648343.04",
+
+			},{
+				"accumulatedSavings"				: "16739578.77",
+				"costOfGridElectricity"				: "1467.28",
+				"electricityCanBeCoveredBySolar"	: "17277.96",
+				"energyConsumedYearly"				: "20445.96",
+				"savingsValue"						: "16739578.77",
+				"year"								: "4",
+				"yearlyElectricityCostWithSolar"	: "13260369.42",
+				"yearlyElectricityCostWithoutSolar"	: "29999948.19",
+				"yearlyMinimumFromPLN"				: "4648343.04",
+
+			},{
+				"accumulatedSavings"				: "16739578.77",
+				"costOfGridElectricity"				: "1467.28",
+				"electricityCanBeCoveredBySolar"	: "17277.96",
+				"energyConsumedYearly"				: "20445.96",
+				"savingsValue"						: "16739578.77",
+				"year"								: "5",
+				"yearlyElectricityCostWithSolar"	: "13260369.42",
+				"yearlyElectricityCostWithoutSolar"	: "29999948.19",
+				"yearlyMinimumFromPLN"				: "4648343.04",
+
+			},{
+				"accumulatedSavings"				: "16739578.77",
+				"costOfGridElectricity"				: "1467.28",
+				"electricityCanBeCoveredBySolar"	: "17277.96",
+				"energyConsumedYearly"				: "20445.96",
+				"savingsValue"						: "16739578.77",
+				"year"								: "6",
+				"yearlyElectricityCostWithSolar"	: "13260369.42",
+				"yearlyElectricityCostWithoutSolar"	: "29999948.19",
+				"yearlyMinimumFromPLN"				: "4648343.04",
+
+			},{
+				"accumulatedSavings"				: "16739578.77",
+				"costOfGridElectricity"				: "1467.28",
+				"electricityCanBeCoveredBySolar"	: "17277.96",
+				"energyConsumedYearly"				: "20445.96",
+				"savingsValue"						: "16739578.77",
+				"year"								: "7",
+				"yearlyElectricityCostWithSolar"	: "13260369.42",
+				"yearlyElectricityCostWithoutSolar"	: "29999948.19",
+				"yearlyMinimumFromPLN"				: "4648343.04",
+
+			},{
+				"accumulatedSavings"				: "16739578.77",
+				"costOfGridElectricity"				: "1467.28",
+				"electricityCanBeCoveredBySolar"	: "17277.96",
+				"energyConsumedYearly"				: "20445.96",
+				"savingsValue"						: "16739578.77",
+				"year"								: "8",
+				"yearlyElectricityCostWithSolar"	: "13260369.42",
+				"yearlyElectricityCostWithoutSolar"	: "29999948.19",
+				"yearlyMinimumFromPLN"				: "4648343.04",
+
+			},{
+				"accumulatedSavings"				: "16739578.77",
+				"costOfGridElectricity"				: "1467.28",
+				"electricityCanBeCoveredBySolar"	: "17277.96",
+				"energyConsumedYearly"				: "20445.96",
+				"savingsValue"						: "16739578.77",
+				"year"								: "9",
+				"yearlyElectricityCostWithSolar"	: "13260369.42",
+				"yearlyElectricityCostWithoutSolar"	: "29999948.19",
+				"yearlyMinimumFromPLN"				: "4648343.04",
+
+			},{
+				"accumulatedSavings"				: "16739578.77",
+				"costOfGridElectricity"				: "1467.28",
+				"electricityCanBeCoveredBySolar"	: "17277.96",
+				"energyConsumedYearly"				: "20445.96",
+				"savingsValue"						: "16739578.77",
+				"year"								: "10",
+				"yearlyElectricityCostWithSolar"	: "13260369.42",
+				"yearlyElectricityCostWithoutSolar"	: "29999948.19",
+				"yearlyMinimumFromPLN"				: "4648343.04",
+
+			},{
+				"accumulatedSavings"				: "16739578.77",
+				"costOfGridElectricity"				: "1467.28",
+				"electricityCanBeCoveredBySolar"	: "17277.96",
+				"energyConsumedYearly"				: "20445.96",
+				"savingsValue"						: "16739578.77",
+				"year"								: "11",
+				"yearlyElectricityCostWithSolar"	: "13260369.42",
+				"yearlyElectricityCostWithoutSolar"	: "29999948.19",
+				"yearlyMinimumFromPLN"				: "4648343.04",
+
+			},{
+				"accumulatedSavings"				: "16739578.77",
+				"costOfGridElectricity"				: "1467.28",
+				"electricityCanBeCoveredBySolar"	: "17277.96",
+				"energyConsumedYearly"				: "20445.96",
+				"savingsValue"						: "16739578.77",
+				"year"								: "12",
+				"yearlyElectricityCostWithSolar"	: "13260369.42",
+				"yearlyElectricityCostWithoutSolar"	: "29999948.19",
+				"yearlyMinimumFromPLN"				: "4648343.04",
+
+			},{
+				"accumulatedSavings"				: "16739578.77",
+				"costOfGridElectricity"				: "1467.28",
+				"electricityCanBeCoveredBySolar"	: "17277.96",
+				"energyConsumedYearly"				: "20445.96",
+				"savingsValue"						: "16739578.77",
+				"year"								: "13",
+				"yearlyElectricityCostWithSolar"	: "13260369.42",
+				"yearlyElectricityCostWithoutSolar"	: "29999948.19",
+				"yearlyMinimumFromPLN"				: "4648343.04",
+
+			},{
+				"accumulatedSavings"				: "16739578.77",
+				"costOfGridElectricity"				: "1467.28",
+				"electricityCanBeCoveredBySolar"	: "17277.96",
+				"energyConsumedYearly"				: "20445.96",
+				"savingsValue"						: "16739578.77",
+				"year"								: "14",
+				"yearlyElectricityCostWithSolar"	: "13260369.42",
+				"yearlyElectricityCostWithoutSolar"	: "29999948.19",
+				"yearlyMinimumFromPLN"				: "4648343.04",
+
+			},{
+				"accumulatedSavings"				: "16739578.77",
+				"costOfGridElectricity"				: "1467.28",
+				"electricityCanBeCoveredBySolar"	: "17277.96",
+				"energyConsumedYearly"				: "20445.96",
+				"savingsValue"						: "16739578.77",
+				"year"								: "15",
+				"yearlyElectricityCostWithSolar"	: "13260369.42",
+				"yearlyElectricityCostWithoutSolar"	: "29999948.19",
+				"yearlyMinimumFromPLN"				: "4648343.04",
+
+			},{
+				"accumulatedSavings"				: "16739578.77",
+				"costOfGridElectricity"				: "1467.28",
+				"electricityCanBeCoveredBySolar"	: "17277.96",
+				"energyConsumedYearly"				: "20445.96",
+				"savingsValue"						: "16739578.77",
+				"year"								: "16",
+				"yearlyElectricityCostWithSolar"	: "13260369.42",
+				"yearlyElectricityCostWithoutSolar"	: "29999948.19",
+				"yearlyMinimumFromPLN"				: "4648343.04",
+
+			},{
+				"accumulatedSavings"				: "16739578.77",
+				"costOfGridElectricity"				: "1467.28",
+				"electricityCanBeCoveredBySolar"	: "17277.96",
+				"energyConsumedYearly"				: "20445.96",
+				"savingsValue"						: "16739578.77",
+				"year"								: "17",
+				"yearlyElectricityCostWithSolar"	: "13260369.42",
+				"yearlyElectricityCostWithoutSolar"	: "29999948.19",
+				"yearlyMinimumFromPLN"				: "4648343.04",
+
+			},{
+				"accumulatedSavings"				: "16739578.77",
+				"costOfGridElectricity"				: "1467.28",
+				"electricityCanBeCoveredBySolar"	: "17277.96",
+				"energyConsumedYearly"				: "20445.96",
+				"savingsValue"						: "16739578.77",
+				"year"								: "18",
+				"yearlyElectricityCostWithSolar"	: "13260369.42",
+				"yearlyElectricityCostWithoutSolar"	: "29999948.19",
+				"yearlyMinimumFromPLN"				: "4648343.04",
+
+			},{
+				"accumulatedSavings"				: "16739578.77",
+				"costOfGridElectricity"				: "1467.28",
+				"electricityCanBeCoveredBySolar"	: "17277.96",
+				"energyConsumedYearly"				: "20445.96",
+				"savingsValue"						: "16739578.77",
+				"year"								: "19",
+				"yearlyElectricityCostWithSolar"	: "13260369.42",
+				"yearlyElectricityCostWithoutSolar"	: "29999948.19",
+				"yearlyMinimumFromPLN"				: "4648343.04",
+
+			},{
+				"accumulatedSavings"				: "16739578.77",
+				"costOfGridElectricity"				: "1467.28",
+				"electricityCanBeCoveredBySolar"	: "17277.96",
+				"energyConsumedYearly"				: "20445.96",
+				"savingsValue"						: "16739578.77",
+				"year"								: "20",
+				"yearlyElectricityCostWithSolar"	: "13260369.42",
+				"yearlyElectricityCostWithoutSolar"	: "29999948.19",
+				"yearlyMinimumFromPLN"				: "4648343.04",
+
+			},{
+				"accumulatedSavings"				: "16739578.77",
+				"costOfGridElectricity"				: "1467.28",
+				"electricityCanBeCoveredBySolar"	: "17277.96",
+				"energyConsumedYearly"				: "20445.96",
+				"savingsValue"						: "16739578.77",
+				"year"								: "21",
+				"yearlyElectricityCostWithSolar"	: "13260369.42",
+				"yearlyElectricityCostWithoutSolar"	: "29999948.19",
+				"yearlyMinimumFromPLN"				: "4648343.04",
+
+			},{
+				"accumulatedSavings"				: "16739578.77",
+				"costOfGridElectricity"				: "1467.28",
+				"electricityCanBeCoveredBySolar"	: "17277.96",
+				"energyConsumedYearly"				: "20445.96",
+				"savingsValue"						: "16739578.77",
+				"year"								: "22",
+				"yearlyElectricityCostWithSolar"	: "13260369.42",
+				"yearlyElectricityCostWithoutSolar"	: "29999948.19",
+				"yearlyMinimumFromPLN"				: "4648343.04",
+
+			},{
+				"accumulatedSavings"				: "16739578.77",
+				"costOfGridElectricity"				: "1467.28",
+				"electricityCanBeCoveredBySolar"	: "17277.96",
+				"energyConsumedYearly"				: "20445.96",
+				"savingsValue"						: "16739578.77",
+				"year"								: "23",
+				"yearlyElectricityCostWithSolar"	: "13260369.42",
+				"yearlyElectricityCostWithoutSolar"	: "29999948.19",
+				"yearlyMinimumFromPLN"				: "4648343.04",
+
+			},{
+				"accumulatedSavings"				: "16739578.77",
+				"costOfGridElectricity"				: "1467.28",
+				"electricityCanBeCoveredBySolar"	: "17277.96",
+				"energyConsumedYearly"				: "20445.96",
+				"savingsValue"						: "16739578.77",
+				"year"								: "24",
+				"yearlyElectricityCostWithSolar"	: "13260369.42",
+				"yearlyElectricityCostWithoutSolar"	: "29999948.19",
+				"yearlyMinimumFromPLN"				: "4648343.04",
+
+			},{
+				"accumulatedSavings"				: "16739578.77",
+				"costOfGridElectricity"				: "1467.28",
+				"electricityCanBeCoveredBySolar"	: "17277.96",
+				"energyConsumedYearly"				: "20445.96",
+				"savingsValue"						: "16739578.77",
+				"year"								: "25",
+				"yearlyElectricityCostWithSolar"	: "13260369.42",
+				"yearlyElectricityCostWithoutSolar"	: "29999948.19",
+				"yearlyMinimumFromPLN"				: "4648343.04",
+			}]),
+			"email"						: "a@yahoo.com",
+			"firstYearSavings"			: "16739578.77",
+			"latitude"					: "-0.7",
+			"lifetimeCO2Reduction"		: "371020.29",
+			"lifetimeCostOfElectricity"	: "498.44",
+			"lifetimeSavings"			: "371020.29",
+			"longitude"					: "114.360",
+			"monthlyElectricityBill"	: "2500000",
+			"monthlyElectricityUse"		: "1703.83",
+			"monthlySolarProduction"	: "1405",
+			"name"						: "jiang",
+			"numberOfPanels"			: "24.75",
+			"paybackPeriod"				: "5.9",
+			"phone"						: "123456789",
+			"power"						: "6600",
+			"province"					: null,
+			"regency"					: null,
+			"returnOnInvestment"		: "12.9",
+			"solarSystemCost"			: "198000000",
+			"systemSize"				: "11",
+			"zipcode"					: "12345"
+		};
+		console.log(simulatedData);
+
+		//SIMULATE DATA
+		var simulatedSuccess = true;
+		if (simulatedSuccess) {
+			//STORING TO LOCALSTORAGE -- BEGIN
+			
+			localStorage.setItem('solar-results', JSON.stringify(simulatedData));
+			
+			
+			//STORING TO LOCALSTORAGE -- END
+		}
+	}
 });
 

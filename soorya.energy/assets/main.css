@@ -1177,12 +1177,22 @@ span.rounded-number {
 
 	.calc-input input[type="range"] {
 		display: inline-block;
-	    text-align: center;
 	    float: none;
+	}
+
+	.calc-input #roof-pit-inp, .calc-input #roof-ori-inp {
+		text-align: center;
 	}
 }
 
+#myChart {
+	min-height: 350px!important;
+	max-height: 500px!important;
+}
 
+#comp-chart2 {
+	margin-bottom: 45px;
+}
 
 
 
@@ -1296,6 +1306,18 @@ footer #copyright {
 
 p.custom-small-text {
 	font-size: 11px;
+}
+
+.success-message {
+	display: none;
+	font-size: 13px;
+	color: #8ac24a;
+}
+
+.error-message {
+	display: none;
+	font-size: 13px;
+	color: #89251f;
 }
 
 
