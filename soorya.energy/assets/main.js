@@ -55,7 +55,8 @@ function initMap() {
 				//$('.calc-input #address').val(place.formatted_address);
 				$('.calc-input #latitude').val(parseFloat(place.geometry.location.lat()));
 				$('.calc-input #longitude').val(parseFloat(place.geometry.location.lng()));
-				$('.calc-input #city').val(city);
+				//No longer needed as user select city from dropdown
+				//$('.calc-input #city').val(city);
 				$('.calc-input #formatted').val(place.formatted_address);
 
             if (!place.geometry) {
@@ -129,7 +130,8 @@ function geocodeLatLng(geocoder, map, infowindow, location) {
 				$('.calc-input #address').val(results[0].formatted_address);
 				$('.calc-input #latitude').val(parseFloat(location.lat()));
 				$('.calc-input #longitude').val(parseFloat(location.lng()));
-				$('.calc-input #city').val(city);
+				//No longer needed as user select city from dropdown
+				//$('.calc-input #city').val(city);
 				$('.calc-input #formatted').val(results[0].formatted_address);
 			} else {
 				window.alert('No results found');
@@ -411,7 +413,7 @@ $(document).ready(function(){
 	// UPDATE VALUE OF COVERAGE
 	// $(document).on('input', '#coverage', function() {
 	// 	// Update Value
- //    	$('.cus-range.cover .thumb .coverage-value').html($(this).val() + "&#37;");
+ 	//  $('.cus-range.cover .thumb .coverage-value').html($(this).val() + "&#37;");
 	// });
 	//UPDATE VALUE OF ROOFPIT
 	$(document).on('input', '#rpit', function() {
@@ -479,7 +481,30 @@ $(document).ready(function(){
 		});
 	});
 
-	$( "form" ).submit(function( event ) {
+	// PREPARE CITY OPTIONS
+	if ($('#city').get(0) != null) {
+		var oldSel = $('#city').get(0);
+
+	    while (oldSel.options.length > 0) {
+	        oldSel.remove(oldSel.options.length - 1);
+	    }
+
+	    var newSel = ["Ambon","Atambua","Balikpapan","Banda Aceh","Bandar Lampung","Bandung","Banjar","Banjarbaru","Banjarmasin","Batam","Batu","Bau-Bau","Bekasi","Bengkulu","Bima","Binjai","Bitung","Blitar","Bogor","Bontang","Bukittinggi","Cianjur","Cilegon","Cimahi","Cirebon","Denpasar","Depok","Dumai","Gorontalo","Gunungsitoli","Jakarta","Jambi","Jayapura","Kediri","Kendari","Kota Sorong","Kotamobagu","Kupang","Langsa","Lhokseumawe","Lubuklinggau","Madiun","Magelang","Makassar","Malang","Manado","Manokwari","Mataram","Medan","Merauke","Metro","Mojokerto","Padang","Padang Panjang","Padang Sidempuan","Pagar Alam","Palangkaraya","Palembang","Palopo","Palu","Pangkal Pinang","Pare-Pare","Pariaman","Pasuruan","Payakumbuh","Pekalongan","Pekanbaru","Pematang Siantar","Pontianak","Prabumulih","Probolinggo","Purwokerto","Sabang","Salatiga","Samarinda","Sawah Lunto","Semarang","Serang","Sibolga","Singkawang","Solok","Tangerang Selatan","Sukabumi","Sungai Penuh","Surabaya","Surakarta","Tangerang","Tanjung Balai","Tanjung Pinang","Tarakan","Tasikmalaya","Tebing Tinggi","Tegal","Tenggarong","Ternate","Tidore","Tomohon","Tual","Yogyakarta",];
+	    
+	    for (i = 0; i < newSel.length; i++)
+	    {
+	        var opt = document.createElement('option');
+
+	        opt.text = newSel[i];
+	        opt.value = newSel[i];
+
+	        oldSel.add(opt, null);
+	    }
+	}
+
+
+	// FORM ON CLICK
+	$( "form#calc-form" ).submit(function( event ) {
 		event.preventDefault();
 
 		//Hide Form
@@ -497,10 +522,11 @@ $(document).ready(function(){
 			$(".calc-input #power").val(parseInt($(".calc-input #power").val().replace(/[^0-9]/g, '')));
 		}
 
-		// Check Value City
-		if ($(".calc-input #city").val().indexOf("Jakarta") != -1) {
-			$(".calc-input #city").val("Kota Jakarta");
-		}
+		// Not needed anymore as per user-city-dropdown
+		// // Check Value City
+		// if ($(".calc-input #city").val().indexOf("Jakarta") != -1) {
+		// 	$(".calc-input #city").val("Kota Jakarta");
+		// }
 
 		// Check Value Rori
 		// console.log($(".calc-input #rori").val());
@@ -572,9 +598,10 @@ $(document).ready(function(){
 	// var simulatedData = {
 		// "address"					: "Indonesia",
 		// "annualSavings"				: "33464329",
+		// "areaRequired"				: "33",
 		// "buildingType"				: "Residential",
-		// "city"						: null,
-		// "costOfElectricityPerWatt"	: "18000",
+		// "city"						: "Jakarta",
+		// "costOfSolarPerWatt"			: "18000",
 		// "electricityBillComparison"	: ([
 		// {
 			// "accumulatedSavings"				: "16739578.77",
@@ -874,5 +901,45 @@ $(document).ready(function(){
 		// "zipcode"					: "12345"
 	// };
 	// console.log(simulatedData);
+
+
+	$( "form#con-form" ).submit(function( event ) {
+		event.preventDefault();
+
+		var JSONinput= {
+			"name": $(".calc-input #name").val().trim(),
+			"emailaddress": $(".calc-input #emailaddress").val().trim(),
+			"subject": $(".calc-input #subject").val().trim(),
+			"message": $(".calc-input #message").val().trim(),
+		};
+
+		$(".calc-input #name").val("");
+		$(".calc-input #emailaddress").val("");
+		$(".calc-input #subject").val("");
+		$(".calc-input #message").val("");
+		
+		//JSONinput = $( this ).serializeArray();
+		console.log(JSONinput);
+
+		$.ajax({
+			type: "POST",
+			url: "http://api.soorya.energy/Api/Contact",
+	        data: JSON.stringify(JSONinput),
+	        contentType: "application/json; charset=utf-8",
+	        dataType: "text",
+			xhrFields: {
+				withCredentials: true
+			},
+	        success: function(data) {
+	        	console.log("Form submitted! Return : " + data);
+	        	$(".success-message").show();
+
+	        },
+	        failure: function(errMsg) {
+	            console.log(errMsg);
+	        	$(".error-message").show();
+	        }
+		});
+	});
 });
 
