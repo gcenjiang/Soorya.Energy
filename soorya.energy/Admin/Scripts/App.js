@@ -2,7 +2,7 @@
 
 var token = "";
 
-var webAPIUrl = "http://api.sooraya.energy/api/"
+var webAPIUrl = "http://api.soorya.energy/api/"
 //var webAPIUrl = "http://localhost:56588/api/"
 
 var ACTION_SUCCESS_TITLE = "Pesan";
