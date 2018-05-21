@@ -923,7 +923,7 @@ $(document).ready(function(){
 
 		$.ajax({
 			type: "POST",
-			url: "http://api.soorya.energy/Api/Contact",
+			url: "http://api.soorya.energy/api/Contact",
 	        data: JSON.stringify(JSONinput),
 	        contentType: "application/json; charset=utf-8",
 	        dataType: "text",
