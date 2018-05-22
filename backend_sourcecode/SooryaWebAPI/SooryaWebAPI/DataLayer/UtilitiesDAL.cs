@@ -1,6 +1,4 @@
 ﻿using Dapper;
-using Microsoft.AspNetCore.Http;
-using SooryaWebAPI.Middleware;
 using System;
 using System.Data;
 using System.Data.SqlClient;

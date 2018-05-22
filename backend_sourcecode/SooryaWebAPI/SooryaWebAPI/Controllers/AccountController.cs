@@ -21,18 +21,18 @@ namespace SooryaWebAPI.Controllers
         public AccountController(IOptions<DBConnection> dbAccessor) => _db = dbAccessor.Value;
 
         // GET: api/Account
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+        //[HttpGet]
+        //public IEnumerable<string> Get()
+        //{
+        //    return new string[] { "value1", "value2" };
+        //}
 
         // GET: api/Account/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
+        //[HttpGet("{id}")]
+        //public string Get(int id)
+        //{
+        //    return "value";
+        //}
 
         [HttpPost("Login")]
         public string Login([FromBody] UserCredential credential)
@@ -69,21 +69,21 @@ namespace SooryaWebAPI.Controllers
         }
 
         // POST: api/Account
-        [HttpPost]
-        public void Post([FromBody]string value)
-        {
-        }
+        //[HttpPost]
+        //public void Post([FromBody]string value)
+        //{
+        //}
         
         // PUT: api/Account/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
+        //[HttpPut("{id}")]
+        //public void Put(int id, [FromBody]string value)
+        //{
+        //}
         
         // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+        //[HttpDelete("{id}")]
+        //public void Delete(int id)
+        //{
+        //}
     }
 }

@@ -21,30 +21,5 @@ namespace SooryaWebAPI.Controllers
             List<CalculationResult> list = dal.GetCalculationResult(startDate, endDate, address);
             return list;
         }
-
-        // GET: api/CalculationResult/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-        
-        // POST: api/CalculationResult
-        [HttpPost]
-        public void Post([FromBody]string value)
-        {
-        }
-        
-        // PUT: api/CalculationResult/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-        
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }

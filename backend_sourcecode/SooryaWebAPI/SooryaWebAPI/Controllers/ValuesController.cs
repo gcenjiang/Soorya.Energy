@@ -1,24 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
-using SooryaWebAPI.Models;
 
 namespace SooryaWebAPI.Controllers
 {
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
-        DBConnection _db;
-        public ValuesController(IOptions<DBConnection> dbAccessor) => _db = dbAccessor.Value;
-
         // GET api/values
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            return new string[] { _db.ConnectionString, "value2" };
+            return new string[] { "value1", "value2" };
         }
 
         // GET api/values/5
