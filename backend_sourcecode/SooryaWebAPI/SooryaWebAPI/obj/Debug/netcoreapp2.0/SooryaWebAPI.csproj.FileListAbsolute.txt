@@ -1,0 +1,10 @@
+D:\Project\SooryaWebAPI\SooryaWebAPI\bin\Debug\netcoreapp2.0\SooryaWebAPI.deps.json
+D:\Project\SooryaWebAPI\SooryaWebAPI\bin\Debug\netcoreapp2.0\SooryaWebAPI.runtimeconfig.json
+D:\Project\SooryaWebAPI\SooryaWebAPI\bin\Debug\netcoreapp2.0\SooryaWebAPI.runtimeconfig.dev.json
+D:\Project\SooryaWebAPI\SooryaWebAPI\bin\Debug\netcoreapp2.0\SooryaWebAPI.dll
+D:\Project\SooryaWebAPI\SooryaWebAPI\bin\Debug\netcoreapp2.0\SooryaWebAPI.pdb
+D:\Project\SooryaWebAPI\SooryaWebAPI\obj\Debug\netcoreapp2.0\SooryaWebAPI.csproj.CoreCompileInputs.cache
+D:\Project\SooryaWebAPI\SooryaWebAPI\obj\Debug\netcoreapp2.0\SooryaWebAPI.AssemblyInfoInputs.cache
+D:\Project\SooryaWebAPI\SooryaWebAPI\obj\Debug\netcoreapp2.0\SooryaWebAPI.AssemblyInfo.cs
+D:\Project\SooryaWebAPI\SooryaWebAPI\obj\Debug\netcoreapp2.0\SooryaWebAPI.dll
+D:\Project\SooryaWebAPI\SooryaWebAPI\obj\Debug\netcoreapp2.0\SooryaWebAPI.pdb
