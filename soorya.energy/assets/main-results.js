@@ -238,7 +238,7 @@ $(document).ready(function(){
 
 		$.ajax({
 			type: "POST",
-			url: "http://api.soorya.energy/api/Calculator/Recalculate",
+			url: "https://api.soorya.energy/api/Calculator/Recalculate",
 	        data: JSON.stringify(JSONinput),
 	        contentType: "application/json; charset=utf-8",
 	        dataType: "json",

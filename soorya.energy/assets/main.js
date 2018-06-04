@@ -557,7 +557,7 @@ $(document).ready(function(){
 
 		$.ajax({
 			type: "POST",
-			url: "http://api.soorya.energy/api/Calculator",
+			url: "https://api.soorya.energy/api/Calculator",
 	        data: JSON.stringify(JSONinput),
 	        contentType: "application/json; charset=utf-8",
 	        dataType: "json",
@@ -923,7 +923,7 @@ $(document).ready(function(){
 
 		$.ajax({
 			type: "POST",
-			url: "http://api.soorya.energy/api/Contact",
+			url: "https://api.soorya.energy/api/Contact",
 	        data: JSON.stringify(JSONinput),
 	        contentType: "application/json; charset=utf-8",
 	        dataType: "text",
