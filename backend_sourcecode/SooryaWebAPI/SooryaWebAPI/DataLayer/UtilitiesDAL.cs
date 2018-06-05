@@ -72,5 +72,34 @@ namespace SooryaWebAPI.DataLayer
                 throw ex;
             }
         }
+
+        public string GetSendGridAPIKey()
+        {
+            try
+            {
+                conn.Open();
+
+                var param = new DynamicParameters();
+
+                param.Add("@SettingCode", "SendGridAPIKey", DbType.String);
+
+                string apiKey = conn.Query<string>("SELECT Setting_Value FROM TblSetting WHERE Setting_Code = @SettingCode", param, commandType: CommandType.Text).FirstOrDefault();
+
+                conn.Close();
+                conn.Dispose();
+
+                return apiKey;
+            }
+            catch (Exception ex)
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                    conn.Dispose();
+                }
+
+                throw ex;
+            }
+        }
     }
 }

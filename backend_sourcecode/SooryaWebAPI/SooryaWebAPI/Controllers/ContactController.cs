@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Mail;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using SendGrid;
 using SendGrid.Helpers.Mail;
+using SooryaWebAPI.DataLayer;
 using SooryaWebAPI.Models;
+using System.Threading.Tasks;
 
 namespace SooryaWebAPI.Controllers
 {
@@ -16,6 +12,9 @@ namespace SooryaWebAPI.Controllers
     [Route("api/Contact")]
     public class ContactController : Controller
     {
+        DBConnection _db;
+        public ContactController(IOptions<DBConnection> dbAccessor) => _db = dbAccessor.Value;
+
         // POST: api/Contact
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]Email email)
@@ -33,7 +32,8 @@ namespace SooryaWebAPI.Controllers
 
         private async Task SendEmail(Email email)
         {
-            var apiKey = "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";
+            UtilitiesDAL dal = new UtilitiesDAL(_db.ConnectionString);
+            var apiKey = dal.GetSendGridAPIKey();
             var client = new SendGridClient(apiKey);
             var from = new EmailAddress(email.EmailAddress, email.Name);
             var subject = email.Subject;
