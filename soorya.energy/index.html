@@ -50,9 +50,9 @@
 				<div class="full-container">
 					<div class="row">
 						<div class="col s3">
-							<i class="material-icons left">work</i>
+							<i class="material-icons left">live_help</i>
 							<h3>What we do</h3>
-							<p>Solar Calculator is your resource for everything solar. We provide all of the information you need to decide whether or not to invest in solar power panels and batteries. We are passionate about solar and its positive environmental and financial benefits.</p>
+							<p>Soorya is your resource for everything about solar. We provide all the information you need to decide whether or not to invest in solar power panels and batteries. We are passionate about solar and its positive environmental and financial benefits.</p>
 						</div>
 						<div class="col s3">
 							<i class="material-icons left">show_chart</i>
@@ -69,14 +69,14 @@
 							</p>
 						</div>
 						<div class="col s3">
-							<i class="material-icons left">highlight</i>
+							<i class="material-icons left">explore</i>
 							<h3>Learn more...</h3>
 							<p>Our site is full of information for people wanting to go solar, and existing owners wanting storage solutions. We cover: solar rebates, feed in tariffs, panel size and cost, battery storage, off grid systems, solar finance and electricity usage; and we provide calculators on each of these topics.</p>
 						</div>
 						<div class="col s3">
 							<i class="material-icons left">format_list_numbered</i>
-							<h3>Get 3 free quotes</h3>
-							<p>If you think solar is right for you, we can put you in touch with 3 recommended, certified, solar installers. Simply fill out our quote form and we’ll take care of the rest.</p>
+							<h3>Get free quotes</h3>
+							<p>If you think solar is right for you, we can put you in touch with 3 recommended, certified, solar installers. Simply fill out our quote form and we’ll take care of the rest. Still in development.</p>
 						</div>
 					</div>
 				</div>
@@ -115,17 +115,18 @@
 						<div class="col s6">
 							<h2 id="calc-title"class="section-title center-align"><span>SOLAR POWER CALCULATOR</span></h2>
 							<p id="calc-desc">Fill in the details about your property and the type of solar power system you are seeking.</p>
+							<p><b><i>Fields with * must be filled.</i></b></p>
 
 							<form id="calc-form" class="unmaterial-form" action="#" method="get" >
 								<!-- HOUSEHOLD DETAILS -->
 								<h3><span class="rounded-number">1</span>HOUSEHOLD DETAILS</h3>
 								<hr>
-								<div class="calc-input req">
-									<label>Zipcode</label>
+								<div class="calc-input">
+									<label>Zipcode/Postal Code</label>
 									<input type="number" name="zipcode" id="zipcode" placeholder="Your zipcode" required/>
 								</div>
 								<div class="calc-input">
-									<label>Building</label>
+									<label>Building Type</label>
 									<select name="building" id="building" form="calc-form">
 										<option value="Residential">Residential</option>
 										<option value="Commercial">Commercial</option>
@@ -133,7 +134,7 @@
 									</select>
 								</div>
 								<div class="calc-input req">
-									<label>Avg. Bill (Rp)</label>
+									<label>Montly Electricity Bill (Rp.)</label>
 									<input type="text" name="bill" id="bill" class="value-input" required/>
 								</div>
 								<div class="calc-input">
@@ -160,7 +161,7 @@
 									<label>Notes on Location</label>
 									<textarea name="notes" id="notes" rows="1" placeholder="Block No. / Floor / Landmark"/></textarea>
 								</div>
-								<div class="calc-input">
+								<div class="calc-input req">
 									<label>City</label>
 									<select name="city" id="city" form="calc-form">
 									</select>

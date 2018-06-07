@@ -44,11 +44,17 @@ function initMap() {
           	console.log(place.geometry.location.lng());
           	console.log(place.address_components);
 
-          		var city = "";
+          		var city = "", zipcode = 0;
 				for (var i=0; i<place.address_components.length; i++) {
 					if (place.address_components[i].types[0] == "administrative_area_level_2") {
 						console.log(place.address_components[i].long_name);
 						city = place.address_components[i].long_name;
+					}
+
+					if (place.address_components[i].types[0] == "postal_code") {
+						console.log(place.address_components[i].long_name);
+						zipcode = place.address_components[i].long_name;
+						$('.calc-input #zipcode').val(zipcode);
 					}
 				}
 
@@ -118,11 +124,15 @@ function geocodeLatLng(geocoder, map, infowindow, location) {
 				});
 				markers.push(marker);
 				
-				var city = "";
+				var city = "", zipcode = 0;
 				for (var i=0; i<results[0].address_components.length; i++) {
 					if (results[0].address_components[i].types[0] == "administrative_area_level_2") {
 						console.log(results[0].address_components[i].long_name);
 						city = results[0].address_components[i].long_name;
+					}
+					if (results[0].address_components[i].types[0] == "postal_code") {
+						console.log(results[0].address_components[i].long_name);
+						zipcode = results[0].address_components[i].long_name;
 					}
 				}
 				infowindow.setContent(results[0].formatted_address);
@@ -133,6 +143,7 @@ function geocodeLatLng(geocoder, map, infowindow, location) {
 				//No longer needed as user select city from dropdown
 				//$('.calc-input #city').val(city);
 				$('.calc-input #formatted').val(results[0].formatted_address);
+				$('.calc-input #zipcode').val(zipcode);
 			} else {
 				window.alert('No results found');
 			}
@@ -334,7 +345,7 @@ $(document).ready(function(){
 			 
 			// 3. Deploy parseInt() function to make sure the value is an integer (a round number).
 			texInp = texInp ? parseInt( texInp, 10 ) : 0;
-			if (valInp.attr('id') == "bill" && texInp > 99999999) {
+			if (valInp.attr('id') == "bill" && texInp > 9999999999) {
 				//console.log("Bill ori : " + texInp);
 				texInp = Math.floor(texInp / 10);
 				//console.log("Bill edi : " + texInp);
