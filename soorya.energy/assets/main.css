@@ -677,6 +677,15 @@ span.rounded-number {
 	margin-bottom: 10px;
 }
 
+.calc-input .form-warning {
+	font-size: 10px;
+	color: red;
+	font-style: italic;
+	float: right;
+    width: 60%;
+    margin-top: 1px;
+}
+
 .calc-input label {
 	font-family: 'MontserratExtraBold', sans-serif;
 	font-size: 12px;

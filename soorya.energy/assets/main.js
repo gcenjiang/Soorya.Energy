@@ -316,6 +316,7 @@ $(document).ready(function(){
 
 	// RUPIAH VALUE WITH COMMA ON DISPLAY
 	var $form = $( "#calc-form" );
+	var billValueIsBigEnough = false;
 	// var $input = $form.find( "#bill" );
 	//var valueInputs = $('.value-input');
 	//console.log($input);
@@ -353,6 +354,14 @@ $(document).ready(function(){
 				//console.log("Power ori : " + texInp);
 				texInp = Math.floor(texInp / 10);
 				//console.log("Power edi : " + texInp);
+			}
+
+			if (valInp.attr('id') == "bill" && texInp > 500000) {
+				$('.form-warning').css("color","#8ac24a");
+				billValueIsBigEnough = true;
+			} else {
+				$('.form-warning').css("color","red");
+				billValueIsBigEnough = false;
 			}
 			 
 			// 4. Add the thousand separator with the toLocaleString() function, then pass the sanitised value back to the input element.
@@ -517,92 +526,98 @@ $(document).ready(function(){
 	// FORM ON CLICK
 	$( "form#calc-form" ).submit(function( event ) {
 		event.preventDefault();
-
-		//Hide Form
-		// $('#calc-title').hide();
-		// $('#calc-desc').hide();
-		// $('#calc-form').hide();
-
-		// Check Value Bill
-		$(".calc-input #bill").val(parseInt($(".calc-input #bill").val().replace(/[^0-9]/g, '')));
-
-		// Check Value Power
-		if (!$(".calc-input #power").val() || $(".calc-input #power").val() == "") {
-			$(".calc-input #power").val('0');
+		if (billValueIsBigEnough == false) {
+			var formWarning = $('.form-warning');
+			formWarning[0].scrollIntoView(false);
 		} else {
-			$(".calc-input #power").val(parseInt($(".calc-input #power").val().replace(/[^0-9]/g, '')));
-		}
 
-		// Not needed anymore as per user-city-dropdown
-		// // Check Value City
-		// if ($(".calc-input #city").val().indexOf("Jakarta") != -1) {
-		// 	$(".calc-input #city").val("Kota Jakarta");
-		// }
+			//Hide Form
+			// $('#calc-title').hide();
+			// $('#calc-desc').hide();
+			// $('#calc-form').hide();
 
-		// Check Value Rori
-		// console.log($(".calc-input #rori").val());
-		// $(".calc-input #rori").val([ "N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW", "N" ]);
+			// Check Value Bill
+			$(".calc-input #bill").val(parseInt($(".calc-input #bill").val().replace(/[^0-9]/g, '')));
 
-		var JSONinput= {
-			"zipcode": $(".calc-input #zipcode").val().trim(),
-			"building": $(".calc-input #building").val().trim(),
-			"bill": $(".calc-input #bill").val().trim(),
-			"power": $(".calc-input #power").val().trim(),
-			"name": $(".calc-input #name").val().trim(),
-			"phone": $(".calc-input #phone").val().trim(),
-			"email": $(".calc-input #email").val().trim(),
-			"address": $(".calc-input #address").val().trim(),
-			"notes": $(".calc-input #notes").val().trim(),
-			"latitude": $(".calc-input #latitude").val().trim(),
-			"longitude": $(".calc-input #longitude").val().trim(),
-			"city": $(".calc-input #city").val().trim(),
-			"formatted": $(".calc-input #formatted").val().trim(),
-			"coverage" : 100,
-			"rpit": $(".calc-input #rpit").val().trim(),
-			"rori": $(".calc-input #rori").val().trim(),
-			"rori_text": $(".calc-input #rori_text").val().trim(),
-		};
-		
-		//JSONinput = $( this ).serializeArray();
-		console.log(JSONinput);
+			// Check Value Power
+			if (!$(".calc-input #power").val() || $(".calc-input #power").val() == "") {
+				$(".calc-input #power").val('0');
+			} else {
+				$(".calc-input #power").val(parseInt($(".calc-input #power").val().replace(/[^0-9]/g, '')));
+			}
 
-		$.ajax({
-			type: "POST",
-			url: "https://api.soorya.energy/api/Calculator",
-	        data: JSON.stringify(JSONinput),
-	        contentType: "application/json; charset=utf-8",
-	        dataType: "json",
-			xhrFields: {
-				withCredentials: true
-			},
-	        success: function(data) {
-	        	console.log(data);
-	        	//Showing Results Below	
+			// Not needed anymore as per user-city-dropdown
+			// // Check Value City
+			// if ($(".calc-input #city").val().indexOf("Jakarta") != -1) {
+			// 	$(".calc-input #city").val("Kota Jakarta");
+			// }
+
+			// Check Value Rori
+			// console.log($(".calc-input #rori").val());
+			// $(".calc-input #rori").val([ "N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW", "N" ]);
+
+			var JSONinput= {
+				"zipcode": $(".calc-input #zipcode").val().trim(),
+				"building": $(".calc-input #building").val().trim(),
+				"bill": $(".calc-input #bill").val().trim(),
+				"power": $(".calc-input #power").val().trim(),
+				"name": $(".calc-input #name").val().trim(),
+				"phone": $(".calc-input #phone").val().trim(),
+				"email": $(".calc-input #email").val().trim(),
+				"address": $(".calc-input #address").val().trim(),
+				"notes": $(".calc-input #notes").val().trim(),
+				"latitude": $(".calc-input #latitude").val().trim(),
+				"longitude": $(".calc-input #longitude").val().trim(),
+				"city": $(".calc-input #city").val().trim(),
+				"formatted": $(".calc-input #formatted").val().trim(),
+				"coverage" : 100,
+				"rpit": $(".calc-input #rpit").val().trim(),
+				"rori": $(".calc-input #rori").val().trim(),
+				"rori_text": $(".calc-input #rori_text").val().trim(),
+			};
+			
+			//JSONinput = $( this ).serializeArray();
+			console.log(JSONinput);
+
+			$.ajax({
+				type: "POST",
+				url: "https://api.soorya.energy/api/Calculator",
+		        data: JSON.stringify(JSONinput),
+		        contentType: "application/json; charset=utf-8",
+		        dataType: "json",
+				xhrFields: {
+					withCredentials: true
+				},
+		        success: function(data) {
+		        	console.log(data);
+		        	//Showing Results Below	
+					// STORING TO LOCALSTORAGE -- BEGIN
+					//
+					localStorage.setItem('solar-results', JSON.stringify(data));
+					localStorage.setItem('building', $(".calc-input #building").val().trim());
+					localStorage.setItem('city', $(".calc-input #city").val().trim());
+					localStorage.setItem('bill', $(".calc-input #bill").val().trim());
+					localStorage.setItem('power', $(".calc-input #power").val().trim());
+					$(location).attr('href','/solar-calculator-results.html');
+					//
+					// STORING TO LOCALSTORAGE -- END
+		        },
+		        failure: function(errMsg) {
+		            console.log(errMsg);
+		        }
+			});
+
+			// var simulatedSuccess = true;
+			// if (simulatedSuccess) {
 				// STORING TO LOCALSTORAGE -- BEGIN
 				//
-				localStorage.setItem('solar-results', JSON.stringify(data));
-				localStorage.setItem('building', $(".calc-input #building").val().trim());
-				localStorage.setItem('city', $(".calc-input #city").val().trim());
-				localStorage.setItem('bill', $(".calc-input #bill").val().trim());
-				localStorage.setItem('power', $(".calc-input #power").val().trim());
-				$(location).attr('href','/solar-calculator-results.html');
+				// localStorage.setItem('solar-results', JSON.stringify(simulatedData));
+				// $(location).attr('href','/solar-calculator-results.html');
 				//
 				// STORING TO LOCALSTORAGE -- END
-	        },
-	        failure: function(errMsg) {
-	            console.log(errMsg);
-	        }
-		});
+			//}
 
-		// var simulatedSuccess = true;
-		// if (simulatedSuccess) {
-			// STORING TO LOCALSTORAGE -- BEGIN
-			//
-			// localStorage.setItem('solar-results', JSON.stringify(simulatedData));
-			// $(location).attr('href','/solar-calculator-results.html');
-			//
-			// STORING TO LOCALSTORAGE -- END
-		//}
+		}
 	});
 
 	//JUST SIMULATING RECEIVED DATA FROM SERVER SIDE
