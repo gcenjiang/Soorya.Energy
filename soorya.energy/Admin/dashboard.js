@@ -40,6 +40,18 @@ $(document).ready(function () {
             { data: "annualSavings" },
             { data: "lifetimeSavings" },
 			{ data: "returnOnInvestment" },
+        ],
+		dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'csv',
+                //text: '<span class="glyphicon glyphicon-print"></span>&nbsp;Print',
+                titleAttr: 'CSV',
+                autoPrint: false,
+                // exportOptions: {
+                    // columns: [1, 2, 3, 4]
+                // }
+            }
         ]
     });
 
